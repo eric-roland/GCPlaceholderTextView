@@ -47,16 +47,15 @@
     if ([self.realText isEqualToString:placeholder]) {
         self.text = aPlaceholder;
     }
-    
-    [placeholder release];
-    placeholder = [aPlaceholder retain];
+
+    placeholder = aPlaceholder;
     
     [self endEditing:nil];
 }
 
 - (NSString *) text {
     NSString* text = [super text];
-    if ([text isEqualToString:self.placeholder]) return @"";
+    if ([text isEqualToString:self.placeholder]) return nil;
     return text;
 }
 
@@ -109,11 +108,7 @@
 #pragma mark Dealloc
 
 - (void)dealloc {
-    [realTextColor release];
-    [placeholder release];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-    [super dealloc];
 }
 
 @end
